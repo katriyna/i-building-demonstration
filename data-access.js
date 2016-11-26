@@ -2,7 +2,11 @@ var request = require('request-promise');
 
 var HUB_SERVICE_SECRET = '7IrG9NGM8ljJ';
 var HUB_SERVICE_ID = 'a58bafcf-bf95-450f-80d5-490c0e2fdfce';
+var YOUTRACK_SERVICE_ID = '0b9e79bb-e5eb-4658-bd02-5025cda2f8ca';
 var HUB_API_URL = 'https://ibuilding-challenge.myjetbrains.com/hub/api/rest';
+var YOUTRACK_API_URL = 'https://ibuilding-challenge.myjetbrains.com/youtrack/api';
+
+var ROOT_ACCESS_TOKEN = '1480191411333.0b9e79bb-e5eb-4658-bd02-5025cda2f8ca.555239a2-f9d5-46dc-a517-9d8fd85361c2.0b9e79bb-e5eb-4658-bd02-5025cda2f8ca 0-0-0-0-0;1.MC0CFQCBWnpISMxuZLzPBYNDhvnlzRKh/gIUFZPe76dPFri5r7+FDhQImYvFJRA=';
 
 function toBase64(str) {
   return new Buffer(str).toString('base64');
@@ -21,7 +25,7 @@ function loadAccessToken() {
     },
     qs: {
       'grant_type': 'client_credentials',
-      'scope': '0-0-0-0-0'
+      'scope': '0-0-0-0-0 ' + YOUTRACK_SERVICE_ID
     },
     json: true
   };
@@ -47,72 +51,35 @@ function wrapRequest(request, accessToken) {
   }
 }
 
-/**
- * See https://www.jetbrains.com/help/hub/2.0/HUB-REST-API_Users_Get-All-Users.html
- */
-function getUsers(wrappedRequest) {
-  var inviteUserOptions = {
-    uri: HUB_API_URL + '/users',
-    method: 'GET',
-    qs: {
-      /**
-       * fields - is a comma-separated list of properties, which server will return for each object
-       */
-      fields: 'id,email,name,login'
-    },
-    json: true
-  };
-
-  return wrappedRequest(inviteUserOptions)
-    .then(function(response) {
-      return response.users;
-    })
-    .catch(function(err) {
-      console.log('err', err);
-    });
-}
-
-/**
- * See https://www.jetbrains.com/help/hub/2.0/HUB-REST-API_Users_Post-Invite.html
- */
-function inviteUser(wrappedRequest, user) {
-  var inviteUserOptions = {
-    uri: HUB_API_URL + '/users/invite',
+function createIssue(wrappedRequest, issue) {
+  var createIssueOptions = {
+    uri: YOUTRACK_API_URL + '/admin/projects/78-0/issues',
     method: 'POST',
-    qs: user,
+    body: issue,
     json: true
   };
 
-  return wrappedRequest(inviteUserOptions)
+  return wrappedRequest(createIssueOptions)
     .then(function(response) {
-      console.log('invite response', response);
-      return response.users;
+      console.log('create issue response', response);
+      return response.issue;
     })
     .catch(function(err) {
       console.log('err', err);
     });
 }
 
-loadAccessToken().then(function(accessToken) {
+loadAccessToken(YOUTRACK_SERVICE_ID).then(function(accessToken) {
   console.log('accessToken', accessToken);
 
   /**
    * Now we have accessToken. Let's add it to headers. Add all requests will make with access token in headers
    */
-  var wrappedRequest = wrapRequest(request, accessToken);
+  var wrappedRequest = wrapRequest(request, ROOT_ACCESS_TOKEN);
 
-  return getUsers(wrappedRequest)
-    .then(function(users) {
-      console.log('users', users);
-    })
-    .then(function() {
-      /**
-       * "email" is obligatory property. Other properties are not obligatory
-       */
-      var user = {
-        email: 'user6@user.ru',
-        login: 'ip6'
-      };
-      return inviteUser(wrappedRequest, user);
-    });
+  var issue = {
+    summary: 'FFFFFFFFF',
+    description: 'Please, do it!'
+  };
+  return createIssue(wrappedRequest, issue);
 });
