@@ -1,0 +1,47 @@
+[
+  {
+    "city": "Espoo",
+    "node_id": "0e34909f-f07f-417c-a667-bf7b12757eef",
+    "street": "Keilaniemi, Keilalahdentie",
+    "sensortypes": [
+      "co2",
+      "relative_humidity_percent",
+      "temperature_celsius",
+      "voc_ch2o_equiv"
+    ],
+    "country": "Finland",
+    "timezone": "Europe/Helsinki",
+    "area_name": "7. krs Tieto Oyj, Keilaniemi",
+    "node_name": "Avotila Itä"
+  },
+  {
+    "city": "Espoo",
+    "node_id": "373c0f3d-71b8-4925-b13d-0d80ffb9f701",
+    "street": "Keilaniemi, Keilalahdentie",
+    "sensortypes": [
+      "co2",
+      "relative_humidity_percent",
+      "temperature_celsius",
+      "voc_ch2o_equiv"
+    ],
+    "country": "Finland",
+    "timezone": "Europe/Helsinki",
+    "area_name": "7. krs Tieto Oyj, Keilaniemi",
+    "node_name": "Avotila länsi"
+  },
+  {
+    "city": "Espoo",
+    "node_id": "ccecc389-73e7-493b-b6bb-1570ad93fd75",
+    "street": "Keilaniemi, Keilalahdentie",
+    "sensortypes": [
+      "co2",
+      "relative_humidity_percent",
+      "temperature_celsius",
+      "voc_ch2o_equiv"
+    ],
+    "country": "Finland",
+    "timezone": "Europe/Helsinki",
+    "area_name": "7. krs Tieto Oyj, Keilaniemi",
+    "node_name": "Neuvotteluhuone 7GM08"
+  }
+]
