@@ -1,7 +1,7 @@
 var request = require('request-promise');
 
-var HUB_SERVICE_SECRET = 'Nes7EOn8TiQU';
-var HUB_SERVICE_ID = '4a1b5441-cc4e-4907-b6b2-9cd1ecfa168b';
+var HUB_SERVICE_SECRET = '7IrG9NGM8ljJ';
+var HUB_SERVICE_ID = 'a58bafcf-bf95-450f-80d5-490c0e2fdfce';
 var HUB_API_URL = 'https://ibuilding-challenge.myjetbrains.com/hub/api/rest';
 
 function toBase64(str) {

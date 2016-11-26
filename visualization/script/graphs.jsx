@@ -42,5 +42,8 @@ var Graph = React.createClass({
 
 
 module.exports = function(lineData, graphNumber) {
-  ReactDOM.render(<Graph lineData={lineData} title={graphNumber} />, document.getElementById('graph-placeholder-' + graphNumber));
+  return ReactDOM.render(
+    <Graph lineData={lineData} title={graphNumber} />,
+    document.getElementById('graph-placeholder-' + graphNumber)
+  );
 };
