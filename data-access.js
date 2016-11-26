@@ -6,7 +6,9 @@ var YOUTRACK_SERVICE_ID = '0b9e79bb-e5eb-4658-bd02-5025cda2f8ca';
 var HUB_API_URL = 'https://ibuilding-challenge.myjetbrains.com/hub/api/rest';
 var YOUTRACK_API_URL = 'https://ibuilding-challenge.myjetbrains.com/youtrack/api';
 
-var ROOT_ACCESS_TOKEN = '1480191411333.0b9e79bb-e5eb-4658-bd02-5025cda2f8ca.555239a2-f9d5-46dc-a517-9d8fd85361c2.0b9e79bb-e5eb-4658-bd02-5025cda2f8ca 0-0-0-0-0;1.MC0CFQCBWnpISMxuZLzPBYNDhvnlzRKh/gIUFZPe76dPFri5r7+FDhQImYvFJRA=';
+var ROOT_ACCESS_TOKEN = '1480194906037.0b9e79bb-e5eb-4658-bd02-5025cda2f8ca.555239a2-f9d5-46dc-a517-9d8fd85361c2.0b9e79bb-e5eb-4658-bd02-5025cda2f8ca 0-0-0-0-0;1.MC0CFEvmpnbfIFkN0bo3tz5DC3cqBj09AhUAiHC7hvpqzSxjFETAhqKhWWR7/8g=';
+
+var PREDEFINED_ISSUES_ENUM = require('./issues-predefined-enum');
 
 function toBase64(str) {
   return new Buffer(str).toString('base64');
@@ -77,9 +79,5 @@ loadAccessToken(YOUTRACK_SERVICE_ID).then(function(accessToken) {
    */
   var wrappedRequest = wrapRequest(request, ROOT_ACCESS_TOKEN);
 
-  var issue = {
-    summary: 'FFFFFFFFF',
-    description: 'Please, do it!'
-  };
-  return createIssue(wrappedRequest, issue);
+  return createIssue(wrappedRequest, PREDEFINED_ISSUES_ENUM.OPEN_WINDOW_SECTION_1);
 });
