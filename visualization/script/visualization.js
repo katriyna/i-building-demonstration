@@ -9,6 +9,8 @@ var USERNAME = 'junction_hackathon@720.fi';
 var PASSWORD = 'i<3python';
 
 var CLIMATE_SENSOR_NODES_BASE_URL = 'https://hackathon.720.fi/nodes';
+var MOCK_SENSORS_BASE_URL = 'https://localhost:3000';
+var mockMode = false;
 
 var NODES = [{
     'node_id': '0e34909f-f07f-417c-a667-bf7b12757eef',
@@ -109,7 +111,10 @@ $(function() {
 });
 
 
-function makeNodeMesurementsRequestUrl(nodeId, from, to) {
+function makeNodeMesurementsRequestUrl(nodeId, from, to, requestNumber) {
+  if (mockMode) {
+    return MOCK_SENSORS_BASE_URL + '/?requestNumber=' + requestNumber;
+  }
   var result = CLIMATE_SENSOR_NODES_BASE_URL + '/';
   result += nodeId;
   result += '/measurements?from=';
